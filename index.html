@@ -381,8 +381,6 @@
     const LOGO_BASE64 = '';
 
     function cargarLogos() {
-
-    function cargarLogos() {
       document.querySelectorAll('.logo-app').forEach(img => {
         img.src = LOGO_BASE64;
       });
@@ -692,58 +690,64 @@ function abrirFormulario() {
       });
     }
 
-    function abrirEdicion(codigo) {
+function abrirEdicion(codigo) {
       document.getElementById('loader').style.display = 'flex';
-      google.script.run
-        .withSuccessHandler(function(datos) {
-          document.getElementById('loader').style.display = 'none';
-          if (datos) {
-            document.getElementById('id-edicion').value = codigo;
-            document.getElementById('titulo-formulario').innerHTML = '✏️ Editando';
+      
+      fetch(API_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ accion: 'obtenerRegistro', codigo: codigo })
+      })
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById('loader').style.display = 'none';
+        if (res.exito && res.datos) {
+          const datos = res.datos;
+          document.getElementById('id-edicion').value = codigo;
+          document.getElementById('titulo-formulario').innerHTML = '✏️ Editando';
+          
+          for (const [id, url] of Object.entries(datos)) {
+            const box = document.getElementById('box-' + id);
+            if (!box) continue;
             
-            // Rellenar las cajas con los archivos existentes
-            for (const [id, url] of Object.entries(datos)) {
-              const box = document.getElementById('box-' + id);
-              if (!box) continue;
+            const img = document.getElementById('img-' + id);
+            const doc = document.getElementById('doc-' + id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (url && url !== "") {
+              box.dataset.url = url;
+              icon.style.display = 'none';
               
-              const img = document.getElementById('img-' + id);
-              const doc = document.getElementById('doc-' + id);
-              const icon = document.getElementById('icon-' + id);
-              
-              if (url && url !== "") {
-                box.dataset.url = url;
-                icon.style.display = 'none';
-                
-                const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                if (match) {
-                   img.src = "https://lh3.googleusercontent.com/d/" + match[1] + "=s150";
-                   img.style.display = 'block';
-                   doc.style.display = 'none';
-                } else {
-                   doc.innerHTML = `<span class="text-2xl">📄</span><br><strong>Archivo guardado</strong>`;
-                   doc.style.display = 'block';
-                   img.style.display = 'none';
-                }
+              const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+              if (match) {
+                 img.src = "https://lh3.googleusercontent.com/d/" + match[1] + "=s150";
+                 img.style.display = 'block';
+                 doc.style.display = 'none';
               } else {
-                box.dataset.url = "";
-                icon.style.display = 'flex';
-                img.style.display = 'none';
-                doc.style.display = 'none';
+                 doc.innerHTML = `<span class="text-2xl">📄</span><br><strong>Archivo guardado</strong>`;
+                 doc.style.display = 'block';
+                 img.style.display = 'none';
               }
+            } else {
+              box.dataset.url = "";
+              icon.style.display = 'flex';
+              img.style.display = 'none';
+              doc.style.display = 'none';
             }
-
-            document.getElementById('pantalla-lista').classList.add('hidden');
-            document.getElementById('pantalla-formulario').classList.remove('hidden');
-            document.getElementById('pantalla-formulario').scrollTop = 0;
-          } else {
-            alert("No se encontró el registro.");
           }
-        })
-        .withFailureHandler(function(error) {
-          document.getElementById('loader').style.display = 'none';
-          alert("Error: " + error.message);
-        })
-        .obtenerRegistroPorCodigo(codigo);
+
+          document.getElementById('pantalla-lista').classList.add('hidden');
+          document.getElementById('pantalla-formulario').classList.remove('hidden');
+          document.getElementById('pantalla-formulario').scrollTop = 0;
+        } else {
+          alert("No se encontró el registro.");
+        }
+      })
+      .catch(error => {
+        document.getElementById('loader').style.display = 'none';
+        alert("Error de conexión: " + error.message);
+      });
     }
   </script>
 </body>

@@ -1,2 +1,0 @@
-# goodcont-app
-Pruebas

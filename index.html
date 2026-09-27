@@ -279,7 +279,7 @@
 
 
   <!-- PANTALLA 2: GALERÍA -->
-    <div id="pantalla-lista" class="hidden fixed inset-0 w-full h-full pt-28 overflow-y-auto" style="background-color: var(--bg-main); -webkit-overflow-scrolling: touch;">
+    <div id="pantalla-lista" class="hidden fixed inset-0 w-full h-full pt-28 flex flex-col overflow-y-auto" style="background-color: var(--bg-main); -webkit-overflow-scrolling: touch;">
     <!-- Encabezado Unificado Fijo: Barra + Selector RUC integrados -->
     <div class="fixed top-0 left-0 w-full z-40 shadow-md glass-header">
       <div class="h-14 flex items-center justify-between px-3">
@@ -301,12 +301,12 @@
     </div>
 
     <!-- Botón + Centrado Fijo Abajo -->
-    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
       <button class="w-[120px] h-14 btn-primary rounded-[22px] flex justify-center items-center text-3xl hover:scale-105 shadow-2xl pointer-events-auto" onclick="abrirFormulario()">＋</button>
     </div>
 
     <!-- Pie de Página Galería al final del scroll -->
-    <div class="w-full mt-10 pb-32 flex justify-center items-center pointer-events-none">
+    <div class="w-full mt-auto pb-4 pt-24 flex justify-center items-center pointer-events-none shrink-0">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>

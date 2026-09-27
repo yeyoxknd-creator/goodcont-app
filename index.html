@@ -468,7 +468,6 @@
         body: JSON.stringify({ accion: 'buscarRucs', correo: email })
       })
       .then(res => res.json())
-
       .then(res => {
         if (res.exito) iniciarApp(res.datos);
         else throw new Error(res.error);
@@ -583,14 +582,21 @@
     }
 
     function gestionarClickArchivo(id) {
-      // Abre el selector de archivos de inmediato para agilizar el reemplazo. 
-      // La miniatura seguirá visible hasta que se elija un archivo nuevo.
-      document.getElementById(id).click();
+      const box = document.getElementById('box-' + id);
+      if (box && box.dataset.url && box.dataset.url !== "") {
+        if (confirm("📄 Ya hay un documento guardado aquí.\n\n• Toca [Aceptar] si quieres REEMPLAZARLO.\n• Toca [Cancelar] si solo quieres VERLO.")) {
+          document.getElementById(id).click();
+        } else {
+          abrirVisor(box.dataset.url, 'Documento adjunto');
+        }
+      } else {
+        document.getElementById(id).click();
+      }
     }
 
     function manejarArchivo(input, id) {
       const box = document.getElementById('box-' + id);
-      if (box) box.dataset.url = ""; // Limpia la URL previa si subes algo nuevo
+      if (box) box.dataset.url = ""; 
       
       const file = input.files[0];
       const icon = document.getElementById('icon-' + id);
@@ -614,7 +620,7 @@
       } else { icon.style.display = 'flex'; }
     }
 
-function abrirFormulario() {
+    function abrirFormulario() {
       document.getElementById('id-edicion').value = '';
       document.getElementById('titulo-formulario').innerHTML = '📄 Nuevo';
       document.getElementById('form-archivos').reset();
@@ -641,8 +647,10 @@ function abrirFormulario() {
     async function enviarFormulario() {
       const form = document.getElementById('form-archivos');
       if(!form.checkValidity()) { form.reportValidity(); return; }
-      document.getElementById('loader').style.display = 'flex';
+      
+      document.getElementById('toast-notificacion').classList.replace('hidden', 'flex');
       document.getElementById('btn-enviar').disabled = true;
+      cerrarFormulario();
 
       const leerBase64 = (file) => new Promise((resolve) => {
         const reader = new FileReader();
@@ -654,7 +662,10 @@ function abrirFormulario() {
         reader.readAsDataURL(file);
       });
 
-      let payloadForm = { ruc: document.getElementById('select-ruc-form').value };
+      let payloadForm = { 
+        ruc: document.getElementById('select-ruc-form').value,
+        idEdicion: document.getElementById('id-edicion').value 
+      };
       const inputsFiles = form.querySelectorAll('input[type="file"]');
       
       for (let input of inputsFiles) {
@@ -671,27 +682,26 @@ function abrirFormulario() {
       })
       .then(res => res.json())
       .then(res => {
-        document.getElementById('loader').style.display = 'none';
+        document.getElementById('toast-notificacion').classList.replace('flex', 'hidden');
         document.getElementById('btn-enviar').disabled = false;
         if (res.exito) {
           form.reset();
           document.querySelectorAll('.image-box .icon-container').forEach(el => el.style.display = 'flex');
           document.querySelectorAll('.image-box img').forEach(el => el.style.display = 'none');
           document.querySelectorAll('.image-box .doc-name').forEach(el => el.style.display = 'none');
-          cerrarFormulario();
           actualizarRucYHistorial();
         } else {
-          alert("Error: " + res.error);
+          alert("Error al guardar: " + res.error);
         }
       })
       .catch(err => {
-        alert("Error de conexión: " + err.message);
-        document.getElementById('loader').style.display = 'none';
+        document.getElementById('toast-notificacion').classList.replace('flex', 'hidden');
         document.getElementById('btn-enviar').disabled = false;
+        alert("Error de conexión: " + err.message);
       });
     }
 
-function abrirEdicion(codigo) {
+    function abrirEdicion(codigo) {
       document.getElementById('loader').style.display = 'flex';
       
       fetch(API_URL, {

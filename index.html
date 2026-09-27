@@ -228,7 +228,7 @@
       </div>
     </div>
     <!-- Controles inferiores anclados y visibles siempre -->
-    <div class="p-4 pb-24 border-t flex flex-col gap-2 shrink-0" style="border-color: var(--border); background-color: var(--bg-panel);">
+    <div class="p-4 pb-6 border-t flex flex-col gap-2 shrink-0" style="border-color: var(--border); background-color: var(--bg-panel);">
       <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-colors" 
               style="color: var(--text-main);" onclick="toggleTema()">
         <span id="btn-theme" class="text-xl">🌙</span> <span id="theme-text">Modo Claro</span>
@@ -237,19 +237,18 @@
               style="color: #F70808;" onclick="toggleMenu(); cerrarSesion();">
         <span class="text-xl font-bold">⏏</span> Cerrar sesión
       </button>
-    <div class="fixed bottom-0 left-0 w-full pb-1 pt-4 border-t z-40 flex justify-center items-start pointer-events-none" 
-         style="background-color: var(--bg-panel); border-color: var(--border);">
-      <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
-        &copy; 2026 GOODCONT • DIEGO CALDERÓN
+      <div class="w-full pt-2 flex justify-center items-center pointer-events-none">
+        <div class="opacity-40 font-semibold tracking-widest uppercase text-center" style="color: var(--text-muted); font-size: 10px;">
+          &copy; 2026 GOODCONT • DIEGO CALDERÓN
+        </div>
       </div>
-    </div>
     </div>
   </div>
 
   <!-- PANTALLA 1: LOGIN -->
 
 <!-- Agrega pb-32 (padding-bottom) para empujar el cuadro hacia arriba. Si quieres bajarlo, usa pt-32 (padding-top) -->
-  <div id="pantalla-login" class="relative flex min-h-screen flex-col justify-center items-center p-4 pb-32 overflow-hidden">
+  <div id="pantalla-login" class="relative flex min-h-screen flex-col justify-center items-center p-4 pb-12 overflow-hidden">
     <div class="ledger-bg absolute inset-0 pointer-events-none"></div>
     <div class="relative rounded-3xl p-8 w-full max-w-[340px] flex flex-col gap-8 shadow-2xl z-10"
          style="background-color: var(--bg-panel);">
@@ -271,7 +270,7 @@
     </div>
     
     <!-- Pie de página Login-->
-    <div class="absolute bottom-0 left-0 w-full pt-4 pb-1 border-t flex justify-center items-start pointer-events-none" style="background-color: var(--bg-panel); border-color: var(--border);">
+    <div class="absolute bottom-6 left-0 w-full flex justify-center items-center pointer-events-none">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>
@@ -280,7 +279,7 @@
 
 
   <!-- PANTALLA 2: GALERÍA -->
-    <div id="pantalla-lista" class="hidden fixed inset-0 w-full h-full pt-28 pb-32 overflow-y-auto" style="background-color: var(--bg-main); -webkit-overflow-scrolling: touch;">
+    <div id="pantalla-lista" class="hidden fixed inset-0 w-full h-full pt-28 overflow-y-auto" style="background-color: var(--bg-main); -webkit-overflow-scrolling: touch;">
     <!-- Encabezado Unificado Fijo: Barra + Selector RUC integrados -->
     <div class="fixed top-0 left-0 w-full z-40 shadow-md glass-header">
       <div class="h-14 flex items-center justify-between px-3">
@@ -306,9 +305,9 @@
       <button class="w-[120px] h-14 btn-primary rounded-[22px] flex justify-center items-center text-3xl hover:scale-105 shadow-2xl pointer-events-auto" onclick="abrirFormulario()">＋</button>
     </div>
 
-    <!-- Barra Inferior (Pie de Página Galería) -->
-    <div class="fixed bottom-0 left-0 w-full pb-1 pt-4 border-t z-40 flex justify-center items-start pointer-events-none" 
-         style="background-color: var(--bg-panel); border-color: var(--border);">
+    <!-- Espacio inferior y Pie de Página Galería al final del scroll -->
+    <div class="h-32 w-full shrink-0 pointer-events-none"></div>
+    <div class="w-full pb-8 flex justify-center items-center pointer-events-none">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>
@@ -316,7 +315,7 @@
   </div>
 
   <!-- PANTALLA 3: FORMULARIO -->
-  <div id="pantalla-formulario" class="hidden pt-20 pb-20 min-h-screen w-full" style="background-color: var(--bg-main);">
+  <div id="pantalla-formulario" class="hidden pt-20 min-h-screen w-full relative" style="background-color: var(--bg-main);">
     <div class="h-16 flex items-center justify-between px-4 shadow-md fixed top-0 w-full z-50 glass-header">
       <div id="titulo-formulario" class="text-white font-black tracking-widest dyn-base uppercase drop-shadow-sm flex items-center gap-2">📄 Nuevo</div>
       <div class="flex items-center gap-2">
@@ -366,13 +365,11 @@
           crearCampoArchivo('adicional', 'Adicional', false);
         </script>
       </div>
-      <!-- Espaciador que ocupa la altura inferior sin romper la cuadrícula -->
-      <div class="h-28 w-full"></div>
-    </form>
+      </form>
 
-    <!-- Barra Inferior (Pie de Página Formulario) -->
-    <div class="fixed bottom-0 left-0 w-full pb-1 pt-4 border-t z-40 flex justify-center items-start pointer-events-none" 
-         style="background-color: var(--bg-panel); border-color: var(--border);">
+    <!-- Espaciador y Barra Inferior (Pie de Página Formulario al final del scroll) -->
+    <div class="h-24 w-full"></div>
+    <div class="w-full pb-8 flex justify-center items-center pointer-events-none">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>

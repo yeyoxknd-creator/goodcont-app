@@ -646,7 +646,28 @@
 
     async function enviarFormulario() {
       const form = document.getElementById('form-archivos');
-      if(!form.checkValidity()) { form.reportValidity(); return; }
+      
+      // EVITAR BLOQUEO DE EDICIÓN: Quitar 'required' temporalmente si ya hay un archivo guardado
+      let inputsRestaurar = [];
+      document.querySelectorAll('.image-box').forEach(box => {
+        if (box.dataset.url && box.dataset.url !== "") {
+          const input = document.getElementById(box.id.replace('box-', ''));
+          if (input && input.required) {
+            input.removeAttribute('required');
+            inputsRestaurar.push(input);
+          }
+        }
+      });
+
+      const esValido = form.checkValidity();
+      
+      // Restaurar el 'required' de inmediato para no afectar futuros registros nuevos
+      inputsRestaurar.forEach(input => input.setAttribute('required', 'required'));
+
+      if(!esValido) { 
+        form.reportValidity(); 
+        return; 
+      }
       
       document.getElementById('toast-notificacion').classList.replace('hidden', 'flex');
       document.getElementById('btn-enviar').disabled = true;

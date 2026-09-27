@@ -464,9 +464,12 @@
       
       fetch(API_URL, {
         method: 'POST',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ accion: 'buscarRucs', correo: email })
       })
       .then(res => res.json())
+
       .then(res => {
         if (res.exito) iniciarApp(res.datos);
         else throw new Error(res.error);
@@ -525,6 +528,8 @@
       
       fetch(API_URL, {
         method: 'POST',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ accion: 'obtenerHistorial', ruc: rucValor })
       })
       .then(res => res.json())
@@ -661,8 +666,9 @@ function abrirFormulario() {
 
       fetch(API_URL, {
         method: 'POST',
-        body: JSON.stringify({ accion: 'procesarSubida', formulario: payloadForm }),
-        redirect: "follow"
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ accion: 'procesarSubida', formulario: payloadForm })
       })
       .then(res => res.json())
       .then(res => {

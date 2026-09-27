@@ -228,7 +228,7 @@
       </div>
     </div>
     <!-- Controles inferiores anclados y visibles siempre -->
-    <div class="p-4 pb-6 border-t flex flex-col gap-2 shrink-0" style="border-color: var(--border); background-color: var(--bg-panel);">
+    <div class="p-4 pb-8 border-t flex flex-col gap-2 shrink-0" style="border-color: var(--border); background-color: var(--bg-panel);">
       <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-colors" 
               style="color: var(--text-main);" onclick="toggleTema()">
         <span id="btn-theme" class="text-xl">🌙</span> <span id="theme-text">Modo Claro</span>
@@ -237,7 +237,7 @@
               style="color: #F70808;" onclick="toggleMenu(); cerrarSesion();">
         <span class="text-xl font-bold">⏏</span> Cerrar sesión
       </button>
-      <div class="w-full pt-2 flex justify-center items-center pointer-events-none">
+      <div class="w-full pt-4 flex justify-center items-center pointer-events-none">
         <div class="opacity-40 font-semibold tracking-widest uppercase text-center" style="color: var(--text-muted); font-size: 10px;">
           &copy; 2026 GOODCONT • DIEGO CALDERÓN
         </div>
@@ -248,7 +248,7 @@
   <!-- PANTALLA 1: LOGIN -->
 
 <!-- Agrega pb-32 (padding-bottom) para empujar el cuadro hacia arriba. Si quieres bajarlo, usa pt-32 (padding-top) -->
-  <div id="pantalla-login" class="relative flex min-h-screen flex-col justify-center items-center p-4 pb-12 overflow-hidden">
+  <div id="pantalla-login" class="relative flex min-h-screen flex-col justify-center items-center p-4 pb-32 overflow-hidden">
     <div class="ledger-bg absolute inset-0 pointer-events-none"></div>
     <div class="relative rounded-3xl p-8 w-full max-w-[340px] flex flex-col gap-8 shadow-2xl z-10"
          style="background-color: var(--bg-panel);">
@@ -270,7 +270,7 @@
     </div>
     
     <!-- Pie de página Login-->
-    <div class="absolute bottom-6 left-0 w-full flex justify-center items-center pointer-events-none">
+    <div class="absolute bottom-4 left-0 w-full flex justify-center items-center pointer-events-none">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>
@@ -301,13 +301,13 @@
     </div>
 
     <!-- Botón + Centrado Fijo Abajo -->
-    <div class="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
       <button class="w-[120px] h-14 btn-primary rounded-[22px] flex justify-center items-center text-3xl hover:scale-105 shadow-2xl pointer-events-auto" onclick="abrirFormulario()">＋</button>
     </div>
 
     <!-- Espacio inferior y Pie de Página Galería al final del scroll -->
     <div class="h-32 w-full shrink-0 pointer-events-none"></div>
-    <div class="w-full pb-8 flex justify-center items-center pointer-events-none">
+    <div class="w-full pb-10 flex justify-center items-center pointer-events-none">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>
@@ -365,11 +365,12 @@
           crearCampoArchivo('adicional', 'Adicional', false);
         </script>
       </div>
-      </form>
+      <!-- Espaciador que ocupa la altura inferior sin romper la cuadrícula -->
+      <div class="h-48 w-full"></div>
+    </form>
 
-    <!-- Espaciador y Barra Inferior (Pie de Página Formulario al final del scroll) -->
-    <div class="h-24 w-full"></div>
-    <div class="w-full pb-8 flex justify-center items-center pointer-events-none">
+    <!-- Pie de Página Formulario al final del scroll -->
+    <div class="w-full pb-10 flex justify-center items-center pointer-events-none">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>

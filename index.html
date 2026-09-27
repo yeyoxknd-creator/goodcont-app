@@ -255,7 +255,7 @@
       <div class="flex flex-col items-center text-center">
         <!-- AQUÍ PEGAS TU BASE64 DESPUÉS DE LA COMA -->
         <img alt="Logo GoodCont" class="logo-app h-[180px] w-auto object-contain mb-3 drop-shadow-sm">
-        <div class="text-[11px] mt-1 font-bold tracking-widest uppercase" style="color: var(--text-muted);">Te cuidamos la espalda</div>
+        <div class="text-[11px] mt-1 font-bold tracking-widest uppercase" style="color: var(--text-muted);">Tu contabilidad al día, sin dolores de cabeza</div>
       </div>
 
       <div class="flex flex-col gap-1.5">
@@ -314,7 +314,7 @@
   </div>
 
   <!-- PANTALLA 3: FORMULARIO -->
-  <div id="pantalla-formulario" class="hidden pt-20 min-h-screen w-full relative" style="background-color: var(--bg-main);">
+  <div id="pantalla-formulario" class="hidden fixed inset-0 w-full h-full pt-20 flex flex-col overflow-y-auto" style="background-color: var(--bg-main); -webkit-overflow-scrolling: touch;">
     <div class="h-16 flex items-center justify-between px-4 shadow-md fixed top-0 w-full z-50 glass-header">
       <div id="titulo-formulario" class="text-white font-black tracking-widest dyn-base uppercase drop-shadow-sm flex items-center gap-2">📄 Nuevo</div>
       <div class="flex items-center gap-2">
@@ -364,12 +364,10 @@
           crearCampoArchivo('adicional', 'Adicional', false);
         </script>
       </div>
-      <!-- Espaciador que ocupa la altura inferior sin romper la cuadrícula -->
-      <div class="h-48 w-full"></div>
-    </form>
+      </form>
 
     <!-- Pie de Página Formulario al final del scroll -->
-    <div class="w-full pb-10 flex justify-center items-center pointer-events-none">
+    <div class="w-full mt-auto pt-16 pb-4 flex justify-center items-center pointer-events-none shrink-0">
       <div class="opacity-40 font-semibold tracking-widest uppercase" style="color: var(--text-muted); font-size: 10px;">
         &copy; 2026 GOODCONT • DIEGO CALDERÓN
       </div>

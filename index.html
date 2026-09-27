@@ -296,7 +296,7 @@
       </div>
     </div>
 
-    <div id="contenedor-historial" class="max-w-2xl mx-auto px-4 flex flex-col gap-4">
+    <div id="contenedor-historial" class="w-full max-w-3xl mx-auto px-4 flex flex-col gap-4">
       <div class="text-center mt-12 dyn-sm font-semibold tracking-wide uppercase" style="color: var(--text-muted);">Cargando datos…</div>
     </div>
 
@@ -323,7 +323,7 @@
       </div>
     </div>
 
-    <form id="form-archivos" class="max-w-2xl mx-auto px-4 flex flex-col gap-6">
+    <form id="form-archivos" class="w-full max-w-3xl mx-auto px-4 flex flex-col gap-6">
       <input type="hidden" id="id-edicion" name="idEdicion" value="">
       <div class="hidden flex-col gap-2 p-4 rounded-2xl mt-4 shadow-sm" style="background-color: var(--bg-panel);">
         <label class="dyn-xs font-bold tracking-wide uppercase" style="color: var(--text-muted);">Empresa vinculada <span class="required-dot">●</span></label>
@@ -352,7 +352,7 @@
         }
       </script>
 
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <script>
           crearCampoArchivo('factura', 'Factura', true);
           crearCampoArchivo('voucher', 'Voucher', false);
